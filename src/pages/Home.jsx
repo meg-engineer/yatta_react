@@ -50,7 +50,7 @@ const Home = () => {
                   transform="translate(100 70)"
                   fill="#fff"
                 />
-                <SvgTitle x="70" y="0" />
+                <SvgTitle />
                 <path
                   d="M477.52,304.69,467,294.15a6.763,6.763,0,0,1,9.57-9.56h0l1,1,1-1a6.76,6.76,0,0,1,9.56,9.56Z"
                   fill="#e50132"
@@ -71,7 +71,7 @@ const Home = () => {
                   d="M722.48,304.69,712,294.15a6.76,6.76,0,0,1,9.56-9.56l1,1,1-1a6.763,6.763,0,1,1,9.57,9.56Z"
                   fill="#e50132"
                 />
-                <SvgImg x="400" y="150" />
+                <SvgImg />
                 <text
                   transform="translate(103.29 347.281)"
                   fill="black"

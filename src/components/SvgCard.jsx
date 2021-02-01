@@ -7,7 +7,7 @@ const SvgCard = () => {
         <style
           dangerouslySetInnerHTML={{
             __html:
-              "\n      .cls-1 { fill: none; } .cls-2 { fill: #b3ddd1; } .cls-3 { fill: #f5b994; } .cls-4 { fill: url(#新規パターンスウォッチ_3); }\n    ",
+              "\n      .cls-100 { fill: none; } .cls-200 { fill: #b3ddd1; } .cls-300 { fill: #f5b994; } .cls-400 { fill: url(#新規パターンスウォッチ_3); }\n    ",
           }}
         />
         <pattern
@@ -19,12 +19,12 @@ const SvgCard = () => {
           patternUnits="userSpaceOnUse"
           viewBox="0 0 34 55"
         >
-          <rect className="cls-1" width={34} height={55} />
-          <rect className="cls-2" width={17} height={55} />
-          <rect className="cls-3" x={17} width={17} height={55} />
+          <rect className="cls-100" width={34} height={55} />
+          <rect className="cls-200" width={17} height={55} />
+          <rect className="cls-300" x={17} width={17} height={55} />
         </pattern>
       </defs>
-      <rect className="cls-4" width={500} height={300} />
+      <rect className="cls-400" width={500} height={300} />
     </svg>
   );
 };
