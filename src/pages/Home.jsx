@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../components/Header";
 import SvgCard from "../components/SvgCard";
 import SvgTitle from "../components/SvgTitle";
 import SvgImg from "../components/SvgImg";
 
 const Home = () => {
+  const [text, setText] = useState("");
+  const [text2, setText2] = useState("");
+  const [text3, setText3] = useState("");
+  const [text4, setText4] = useState("");
+
+  function createMessage(e) {
+    const data = e.target.value;
+    setText(data.substring(0, 15));
+    setText2(data.substring(15, 30));
+    setText3(data.substring(30, 45));
+    setText4(data.substring(45, 60));
+  }
+
   return (
     <div>
       <Header />
@@ -63,14 +76,14 @@ const Home = () => {
                   d="M600,304.69l-10.54-10.54a6.763,6.763,0,0,1,9.57-9.56h0l1,1,1-1a6.763,6.763,0,1,1,9.57,9.56h0Z"
                   fill="#e50132"
                 />
-                <path
+                {/* <path
                   d="M661.24,304.69l-10.53-10.54a6.76,6.76,0,0,1,9.56-9.56l1,1,1-1a6.763,6.763,0,1,1,9.57,9.56h0Z"
                   fill="#e50132"
                 />
                 <path
                   d="M722.48,304.69,712,294.15a6.76,6.76,0,0,1,9.56-9.56l1,1,1-1a6.763,6.763,0,1,1,9.57,9.56Z"
                   fill="#e50132"
-                />
+                /> */}
                 <SvgImg />
                 <text
                   transform="translate(103.29 347.281)"
@@ -80,10 +93,18 @@ const Home = () => {
                   letterSpacing="-0.002em"
                   wordBreak="normal"
                 >
-                  {/* <tspan x="280" y="52">{{ text2 }}</tspan>
-                  <tspan x="280" y="78">{{ text3 }}</tspan>
-                  <tspan x="280" y="104">{{ text4 }}</tspan>
-                  <tspan x="280" y="130">{{ text5 }}</tspan> */}
+                  <tspan x="230" y="30">
+                    {text}
+                  </tspan>
+                  <tspan x="230" y="70">
+                    {text2}
+                  </tspan>
+                  <tspan x="230" y="110">
+                    {text3}
+                  </tspan>
+                  <tspan x="230" y="150">
+                    {text4}
+                  </tspan>
                 </text>
               </g>
             </g>
@@ -101,9 +122,12 @@ const Home = () => {
               rows="4"
               className="textarea"
               style={{ width: "80%", padding: "0.625em", resize: "vertical" }}
+              onChange={createMessage}
             ></textarea>
             <div class="create-button center">
-              <button className="button-color">作成する</button>
+              <button className="button-color" onClick={() => null}>
+                作成する
+              </button>
             </div>
           </div>
         </div>
