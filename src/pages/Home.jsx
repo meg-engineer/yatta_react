@@ -68,8 +68,8 @@ const Home = () => {
       await card.add({
         url,
         text,
-        post_id: uuid,
-        created_at: new Date(),
+        postId: uuid,
+        createdAt: new Date(),
       });
       setText("");
       setText2("");
