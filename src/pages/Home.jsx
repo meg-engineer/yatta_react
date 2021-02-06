@@ -1,21 +1,83 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import { useHistory } from "react-router-dom";
+import firebase from "../firebase";
 import Header from "../components/Header";
 import SvgCard from "../components/SvgCard";
 import SvgTitle from "../components/SvgTitle";
 import SvgImg from "../components/SvgImg";
 
 const Home = () => {
-  const [text, setText] = useState("");
+  const history = useHistory();
+  const svgCard = useRef(null);
+  const [text, setText] = useState("ケーキもらった");
   const [text2, setText2] = useState("");
   const [text3, setText3] = useState("");
   const [text4, setText4] = useState("");
 
+  //画像生成
+  function svg2imageData(svgElement, successCallback, errorCallback) {
+    const canvas = document.createElement("canvas");
+    canvas.width = 800;
+    canvas.height = 500;
+    const context = canvas.getContext("2d"); // 二次元グラフィックスのコンテキストを取得
+    const image = new Image(); //新たな画像作成
+    const svgData = new XMLSerializer().serializeToString(svgElement.current); //svgを文字列へ変換
+
+    image.src =
+      "data:image/svg+xml;charset=utf-8;base64," +
+      btoa(unescape(encodeURIComponent(svgData)));
+    image.onload = () => {
+      context.drawImage(image, 0, 0, 800, 500);
+      successCallback(canvas.toDataURL());
+    };
+    image.onerror = (e) => {
+      errorCallback(e);
+    };
+  }
+
+  //firebase function保存url用文字列作成
+  function getUniqueStr(myStrong) {
+    var strong = 1000;
+    if (myStrong) strong = myStrong;
+    return (
+      new Date().getTime().toString(16) +
+      Math.floor(strong * Math.random()).toString(16)
+    );
+  }
+
+  //入力した文字列を分割してsvg上に表示
   function createMessage(e) {
     const data = e.target.value;
     setText(data.substring(0, 15));
     setText2(data.substring(15, 30));
     setText3(data.substring(30, 45));
     setText4(data.substring(45, 60));
+  }
+
+  //firebase Cloud Storageにアップロード、firestoreに保存
+  async function createCard() {
+    svg2imageData(svgCard, async (data) => {
+      const sRef = firebase.storage().ref();
+      var uuid = getUniqueStr();
+      const fileRef = sRef.child(`${uuid}.png`);
+      // Firebase Cloud Storageにアップロード
+      await fileRef.putString(data, "data_url");
+      const url = await fileRef.getDownloadURL();
+      console.log(url);
+      // Firestoreに保存
+      const card = firebase.firestore().collection("cards");
+      await card.add({
+        url,
+        text,
+        post_id: uuid,
+        created_at: new Date(),
+      });
+      setText("");
+      setText2("");
+      setText3("");
+      setText4("");
+      history.push(`/post/${uuid}`);
+    });
   }
 
   return (
@@ -30,7 +92,6 @@ const Home = () => {
         }}
       >
         <div
-          // className="card-container"
           style={{
             position: "relative",
             width: "80%",
@@ -40,10 +101,10 @@ const Home = () => {
           }}
         >
           <svg
+            ref={svgCard}
             width="800px"
             height="500px"
             viewBox="0 0 1200 630"
-            // className="card-svg"
             style={{
               display: "block",
               position: "absolute",
@@ -76,14 +137,6 @@ const Home = () => {
                   d="M600,304.69l-10.54-10.54a6.763,6.763,0,0,1,9.57-9.56h0l1,1,1-1a6.763,6.763,0,1,1,9.57,9.56h0Z"
                   fill="#e50132"
                 />
-                {/* <path
-                  d="M661.24,304.69l-10.53-10.54a6.76,6.76,0,0,1,9.56-9.56l1,1,1-1a6.763,6.763,0,1,1,9.57,9.56h0Z"
-                  fill="#e50132"
-                />
-                <path
-                  d="M722.48,304.69,712,294.15a6.76,6.76,0,0,1,9.56-9.56l1,1,1-1a6.763,6.763,0,1,1,9.57,9.56Z"
-                  fill="#e50132"
-                /> */}
                 <SvgImg />
                 <text
                   transform="translate(103.29 347.281)"
@@ -125,7 +178,7 @@ const Home = () => {
               onChange={createMessage}
             ></textarea>
             <div class="create-button center">
-              <button className="button-color" onClick={() => null}>
+              <button className="button-color" onClick={createCard}>
                 作成する
               </button>
             </div>
