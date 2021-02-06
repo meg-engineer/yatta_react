@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import firebase from "../firebase";
+import { Button } from "antd";
+import { TwitterOutlined } from "@ant-design/icons";
 import Header from "../components/Header";
 
 const Post = () => {
@@ -36,14 +38,21 @@ const Post = () => {
         <div>
           <img src={post.url} alt="Card image cap" />
         </div>
-        <div>
-          <Link to={{ pathname: twUrl }} target="_blank">
-            <button type="button">twitterで共有する</button>
-          </Link>
-          <Link to="/">
-            <button type="button">もどる</button>
-          </Link>
-        </div>
+        <container>
+          <div>
+            <Link to={{ pathname: twUrl }} target="_blank">
+              <Button shape="round" type="primary" icon={<TwitterOutlined />}>
+                Twitterで共有する
+              </Button>
+            </Link>
+          </div>
+          <div>
+            {" "}
+            <Link to="/">
+              <Button shape="round">もどる</Button>
+            </Link>
+          </div>
+        </container>
       </div>
     </div>
   );

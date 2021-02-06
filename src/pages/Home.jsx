@@ -1,12 +1,14 @@
 import React, { useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import firebase from "../firebase";
+import { Input, Button } from "antd";
 import Header from "../components/Header";
 import SvgCard from "../components/SvgCard";
 import SvgTitle from "../components/SvgTitle";
 import SvgImg from "../components/SvgImg";
 
 const Home = () => {
+  const { TextArea } = Input;
   const history = useHistory();
   const svgCard = useRef(null);
   const [text, setText] = useState("ケーキもらった");
@@ -165,22 +167,20 @@ const Home = () => {
         <div style={{ width: "50%" }}>
           <p>やった！</p>
           <div>
-            <textarea
-              v-model="text"
-              type="text"
-              maxlength="100"
-              minlength="1"
+            <TextArea
+              rows={4}
+              showCount
+              maxLength={100}
+              minlength={1}
+              style={{ width: "80%" }}
               required
-              rows="4"
-              className="textarea"
-              style={{ width: "80%", padding: "0.625em", resize: "vertical" }}
               onChange={createMessage}
               placeholder="嬉しかったことをここに入力してね！"
-            ></textarea>
+            />
             <div>
-              <button type="button" onClick={createCard}>
+              <Button size="large" shape="round" onClick={createCard}>
                 作成する
-              </button>
+              </Button>
             </div>
           </div>
         </div>
