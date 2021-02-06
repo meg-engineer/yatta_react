@@ -63,7 +63,6 @@ const Home = () => {
       // Firebase Cloud Storageにアップロード
       await fileRef.putString(data, "data_url");
       const url = await fileRef.getDownloadURL();
-      console.log(url);
       // Firestoreに保存
       const card = firebase.firestore().collection("cards");
       await card.add({
