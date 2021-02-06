@@ -29,20 +29,20 @@ const Post = () => {
       });
   }, []);
 
-  console.log(post);
-
   return (
     <div>
       <Header />
-      <div>
+      <div style={{ textAlign: "center", background: "#fffff2" }}>
         <div>
           <img src={post.url} alt="Card image cap" />
         </div>
         <div>
           <Link to={{ pathname: twUrl }} target="_blank">
-            twitterで共有する
+            <button type="button">twitterで共有する</button>
           </Link>
-          <Link to="/">もどる</Link>
+          <Link to="/">
+            <button type="button">もどる</button>
+          </Link>
         </div>
       </div>
     </div>

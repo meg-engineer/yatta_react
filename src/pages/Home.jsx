@@ -162,9 +162,9 @@ const Home = () => {
             </g>
           </svg>
         </div>
-        <div className="input-container" style={{ width: "50%" }}>
+        <div style={{ width: "50%" }}>
           <p>やった！</p>
-          <div className="message-input">
+          <div>
             <textarea
               v-model="text"
               type="text"
@@ -175,9 +175,10 @@ const Home = () => {
               className="textarea"
               style={{ width: "80%", padding: "0.625em", resize: "vertical" }}
               onChange={createMessage}
+              placeholder="嬉しかったことをここに入力してね！"
             ></textarea>
-            <div class="create-button center">
-              <button className="button-color" onClick={createCard}>
+            <div>
+              <button type="button" onClick={createCard}>
                 作成する
               </button>
             </div>
