@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import SvgCard from "../components/SvgCard";
 import SvgTitle from "../components/SvgTitle";
 import SvgImg from "../components/SvgImg";
+import Footer from "../components/Footer";
 
 const Home = () => {
   const { TextArea } = Input;
@@ -185,6 +186,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
