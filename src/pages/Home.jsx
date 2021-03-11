@@ -146,7 +146,6 @@ const Home = () => {
                   fontSize="29"
                   fontFamily="HiraginoSans-W5, Hiragino Sans"
                   letterSpacing="-0.002em"
-                  wordBreak="normal"
                 >
                   <tspan x="230" y="30">
                     {text}
@@ -172,7 +171,7 @@ const Home = () => {
               rows={4}
               showCount
               maxLength={100}
-              minlength={1}
+              minLength={1}
               style={{ width: "80%" }}
               required
               onChange={createMessage}
